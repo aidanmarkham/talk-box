@@ -12,6 +12,11 @@ namespace TalkBox.Core
     {
         public string Name;
 
-        [HideInInspector] public string ID = Guid.NewGuid().ToString();
+        public string ID = Guid.NewGuid().ToString();
+        [Button]
+        public void GenerateNewID()
+        {
+            ID = Guid.NewGuid().ToString();
+        }
     }
 }

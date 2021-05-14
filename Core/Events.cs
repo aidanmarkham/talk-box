@@ -48,14 +48,19 @@ namespace TalkBox.Core
         // Called when a letter is spoken
         public class SpeakingEvent : MSEvent
         {
-            public static SpeakingEvent Prepare(char letter)
+            public static SpeakingEvent Prepare(CharacterData character, char letter, float duration)
             {
                 var e = new SpeakingEvent();
                 e.Letter = letter;
+                e.Duration = duration;
+                e.Character = character;
                 return e;
             }
 
             public char Letter { get; private set; }
+            public float Duration { get; private set; }
+
+            public CharacterData Character { get; private set; }
         }
 
     }

@@ -169,11 +169,12 @@ public class DialogueDisplay : MSBehaviour
             // Display the text 
             DialogueText.text = currentText;
 
-            EventDispatcher.Dispatch(SpeakingEvent.Prepare(rawText[index]));
+            
 
             // Wait for a while depending on what character we just showed
             if (Char.IsLetterOrDigit(rawText[index]))
             {
+                EventDispatcher.Dispatch(SpeakingEvent.Prepare(d.Character, rawText[index], LetterDelay));
                 yield return StartCoroutine(SkippableWaitForSeconds(LetterDelay));
             }
             else if (rawText[index] == '.')
@@ -193,9 +194,6 @@ public class DialogueDisplay : MSBehaviour
             // Go to the next character
             index++;         
         }
-
-        // Speak a space at the end (to potentially close a character's mouth)
-        EventDispatcher.Dispatch(SpeakingEvent.Prepare(' '));
 
         // Wait a frame to avoid accidentally skipping to next dialogue
         yield return null;

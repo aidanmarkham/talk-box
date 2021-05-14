@@ -1,12 +1,13 @@
 ﻿using MacSalad.Core;
 using MacSalad.Core.Events;
+using TMPro;
 
 namespace TalkBox.Missions
 {
     public class MissionManager : SingletonMB<MissionManager>
     {
         public Mission[] Missions;
-
+        public TMP_Text MissionDisplay;
         public enum MissionState
         {
             NotStarted,
@@ -58,6 +59,35 @@ namespace TalkBox.Missions
             {
                 Missions[i] = Instantiate(Missions[i]);
             }
+        }
+
+
+        private void Update()
+        {
+            UpdateText();
+        }
+        public void UpdateText()
+        {
+            string text = "";
+            for (int i = 0; i < Missions.Length; i++)
+            {
+                if (Missions[i].Completion != MissionState.NotStarted)
+                {
+                    string prefix = "";
+
+                    if (Missions[i].Completion == MissionState.InProgress)
+                    {
+                        prefix += "☐ ";
+                    }
+                    else
+                    {
+                        prefix += "☑ ";
+                    }
+
+                    text += prefix + Missions[i].DisplayText + "\n";
+                }
+            }
+            MissionDisplay.text = text;
         }
 
         public MissionState GetMissionState(Mission m)
