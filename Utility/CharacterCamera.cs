@@ -8,7 +8,7 @@ namespace TalkBox.Utility
 {
     public class CharacterCamera : MSBehaviour
     {
-#if CINEMACHINE_PRESENT
+
         public int ActivePriority = 100;
         public int InactivePriority = 0;
         public CharacterData Character;
@@ -53,6 +53,5 @@ namespace TalkBox.Utility
                 Camera.Priority = InactivePriority;
             }
         }
-#endif
     }
 }

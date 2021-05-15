@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TalkBox.Core
 {
@@ -165,6 +166,10 @@ namespace TalkBox.Core
             }
             public GameState State;
             public GameState LastState;
+        }
+        public void ReloadScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public Character GetCharacter(CharacterData data)
