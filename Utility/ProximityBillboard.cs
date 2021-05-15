@@ -29,10 +29,10 @@ namespace TalkBox.Utility
         void Start()
         {
 #if CINEMACHINE_PRESENT
-            view = FindObjectOfType<CinemachineBrain>().transform;
+            view = Camera.main.GetComponent<CinemachineBrain>().transform;
 
 #else
-        view = Camera.main.transform;
+            view = Camera.main.transform;
 #endif
         }
 
