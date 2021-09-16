@@ -14,7 +14,8 @@ namespace TalkBox.Missions
 
         public MissionManager.MissionState Completion = MissionManager.MissionState.NotStarted;
 
-        
+        [Tooltip("A mission to be set as in progress after this mission is complete")]
+        public Mission FollowingMission = null;
 
     }
 }

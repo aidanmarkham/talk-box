@@ -8,6 +8,8 @@ namespace TalkBox.Missions
     {
         public Mission[] Missions;
         public TMP_Text MissionDisplay;
+        private string missionDisplayText;
+
         public enum MissionState
         {
             NotStarted,
@@ -49,6 +51,11 @@ namespace TalkBox.Missions
                 if (Missions[i].ID == e.Mission.ID)
                 {
                     Missions[i].Completion = e.State;
+
+                    if(Missions[i].FollowingMission != null)
+					{
+                        EventDispatcher.Dispatch(MissionEvent.Prepare(Missions[i].FollowingMission, MissionState.InProgress));
+					}
                 }
             }
         }
@@ -74,21 +81,33 @@ namespace TalkBox.Missions
                 if (Missions[i].Completion != MissionState.NotStarted)
                 {
                     string prefix = "";
-
+                    string postfix = "";
                     if (Missions[i].Completion == MissionState.InProgress)
                     {
-                        prefix += "☐ ";
+                        prefix += "• ";                      
                     }
                     else
                     {
-                        prefix += "☑ ";
+                        prefix += "• <s>";
+                        postfix += "</s>";
                     }
 
-                    text += prefix + Missions[i].DisplayText + "\n";
+                    text += prefix + Missions[i].DisplayText + postfix + "\n";
                 }
             }
-            MissionDisplay.text = text;
+            missionDisplayText = text;
+
+            UpdateTextDisplay();
         }
+
+        public void UpdateTextDisplay()
+		{
+            if(MissionDisplay.text != missionDisplayText)
+			{
+                MissionDisplay.text = missionDisplayText;
+                MissionDisplay.ForceMeshUpdate();
+			}
+		}
 
         public MissionState GetMissionState(Mission m)
         {
