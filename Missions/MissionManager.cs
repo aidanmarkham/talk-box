@@ -64,7 +64,7 @@ namespace TalkBox.Missions
 
         private void Update()
         {
-            UpdateText();
+            if(MissionDisplay) UpdateText();
         }
         public void UpdateText()
         {
