@@ -79,7 +79,7 @@ namespace TalkBox.Missions
             string text = "";
             for (int i = 0; i < Missions.Length; i++)
             {
-                if (Missions[i].Completion != MissionState.NotStarted)
+                if (Missions[i].Completion != MissionState.NotStarted && Missions[i].DisplayText != "")
                 {
                     string prefix = "";
                     string postfix = "";
