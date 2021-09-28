@@ -52,7 +52,8 @@ namespace TalkBox.Missions
                 {
                     Missions[i].Completion = e.State;
 
-                    if(Missions[i].FollowingMission != null &&
+                    if(e.State == MissionState.Complete &&
+                        Missions[i].FollowingMission != null &&
                         GetMissionState(Missions[i].FollowingMission) == MissionState.NotStarted)
 					{
                         EventDispatcher.Dispatch(MissionEvent.Prepare(Missions[i].FollowingMission, MissionState.InProgress));
