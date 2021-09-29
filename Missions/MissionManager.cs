@@ -1,6 +1,7 @@
 ﻿using MacSalad.Core;
 using MacSalad.Core.Events;
 using TMPro;
+using UnityEngine.Events;
 
 namespace TalkBox.Missions
 {
@@ -9,6 +10,8 @@ namespace TalkBox.Missions
         public Mission[] Missions;
         public TMP_Text MissionDisplay;
         private string missionDisplayText;
+
+        public UnityEvent OnDisplayUpdated;
 
         public enum MissionState
         {
@@ -108,6 +111,7 @@ namespace TalkBox.Missions
 			{
                 MissionDisplay.text = missionDisplayText;
                 MissionDisplay.ForceMeshUpdate();
+                OnDisplayUpdated.Invoke();
 			}
 		}
 
