@@ -1,4 +1,5 @@
-﻿using MacSalad.Core;
+﻿using System;
+using MacSalad.Core;
 using MacSalad.Core.Events;
 using TMPro;
 using UnityEngine.Events;
@@ -15,9 +16,9 @@ namespace TalkBox.Missions
 
         public enum MissionState
         {
-            NotStarted,
-            InProgress,
-            Complete
+            NotStarted = 0,
+            InProgress = 1,
+            Complete = 2
         }
 
         protected override void SetInstance()
@@ -33,6 +34,19 @@ namespace TalkBox.Missions
             base.SafeInitialize();
 
             InstantiateMissions();
+        }
+
+        private void Start()
+        {
+            // dispatch events for missions that have already started
+            // allows listeners in scene to react to missions that start completed/in progress
+            foreach (var mission in Missions)
+            {
+	            if (mission.Completion > MissionState.NotStarted)
+	            {
+		            EventDispatcher.Dispatch(MissionEvent.Prepare(mission, mission.Completion));
+	            }
+            }
         }
 
         protected override void AddEventListeners()
