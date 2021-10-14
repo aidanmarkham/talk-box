@@ -17,5 +17,12 @@ namespace TalkBox.Missions
         [Tooltip("A mission to be set as in progress after this mission is complete")]
         public Mission FollowingMission = null;
 
+        public override bool Equals(object other)
+        {
+	        // compare ID for missions so runtime instances are equal to originals
+	        if (other is Mission mission) return mission.ID.Equals(ID);
+	        
+	        return base.Equals(other);
+        }
     }
 }

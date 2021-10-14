@@ -32,19 +32,16 @@ namespace TalkBox.Missions
 
         private void Mission_Event(MissionEvent e)
         {
-            if (e.Mission == Mission && e.State == State)
-            {
-                if (WaitForState)
-                {
-                    StartCoroutine(WaitForGameState());
-                }
-                else
-                {
-                    OnState.Invoke();
-                }
-
-
-            }
+	        if (!e.Mission.Equals(Mission) || e.State != State) return;
+	        
+	        if (WaitForState)
+	        {
+		        StartCoroutine(WaitForGameState());
+	        }
+	        else
+	        {
+		        OnState.Invoke();
+	        }
         }
 
         IEnumerator WaitForGameState()
