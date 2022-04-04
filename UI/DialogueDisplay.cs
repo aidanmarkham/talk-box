@@ -10,6 +10,7 @@ using MacSalad.Core.Events;
 using static TalkBox.Core.Events;
 using TalkBox.Nodes;
 using TalkBox.Core;
+using UnityEngine.InputSystem;
 
 public class DialogueDisplay : MSBehaviour
 {
@@ -23,6 +24,8 @@ public class DialogueDisplay : MSBehaviour
     public TMP_Text DialogueText;
     public TMP_Text NameText;
     public UIFader Fader;
+
+    public InputActionReference ProceedAction;
 
     private bool ConversationInProgress = false;
 
@@ -147,7 +150,7 @@ public class DialogueDisplay : MSBehaviour
         // While there's letters left to show
         while (index < rawText.Length)
         {
-            if(Input.GetMouseButtonUp(0))
+            if(ProceedAction.action.triggered)
             {
                 index = rawText.Length - 1;
             }
@@ -199,7 +202,7 @@ public class DialogueDisplay : MSBehaviour
         yield return null;
 
         // If we're supposed to wait for input, wait for that here
-        while (d.WaitForInput && !Input.GetMouseButtonUp(0))
+        while (d.WaitForInput && !ProceedAction.action.triggered)
         {
             yield return null;
         }
@@ -217,7 +220,7 @@ public class DialogueDisplay : MSBehaviour
         {
             yield return null;
 
-            if (Input.GetMouseButtonUp(0))
+            if (ProceedAction.action.triggered)
             {
                 break;
             }

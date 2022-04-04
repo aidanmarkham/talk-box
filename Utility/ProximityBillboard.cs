@@ -22,7 +22,7 @@ namespace TalkBox.Utility
         public UnityEvent Hide;
 
         private Transform view;
-        private bool shown = false;
+        private bool shown = true;
 
 
         // Start is called before the first frame update
@@ -53,10 +53,13 @@ namespace TalkBox.Utility
                         Hide.Invoke();
                     }
 
+                    /*
                     if (Input.GetMouseButtonDown(0))
                     {
                         OnInteraction();
                     }
+                    */
+
                 }
                 else
                 {
