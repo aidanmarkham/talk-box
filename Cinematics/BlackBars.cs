@@ -19,24 +19,28 @@ namespace TalkBox.Cinematics
         // Update is called once per frame
         void Update()
         {
-            if (DialogueManager.Instance.State == DialogueManager.GameState.Gameplay)
+            if (DialogueManager.Instance.State == DialogueManager.GameState.Gameplay_Cinematic ||
+                DialogueManager.Instance.State == DialogueManager.GameState.Dialogue ||
+                DialogueManager.Instance.State == DialogueManager.GameState.Cutscene
+            )
             {
                 var scale = upper.localScale;
-                scale.y = Mathf.Lerp(scale.y, 0, Time.deltaTime * Easing);
+                scale.y = Mathf.Lerp(scale.y, 1, Time.deltaTime * Easing);
                 upper.localScale = scale;
 
                 scale = lower.localScale;
-                scale.y = Mathf.Lerp(scale.y, 0, Time.deltaTime * Easing);
+                scale.y = Mathf.Lerp(scale.y, 1, Time.deltaTime * Easing);
                 lower.localScale = scale;
+
             }
             else
             {
                 var scale = upper.localScale;
-                scale.y = Mathf.Lerp(scale.y, 1, Time.deltaTime * Easing);
+                scale.y = Mathf.Lerp(scale.y, 0, Time.deltaTime * Easing);
                 upper.localScale = scale;
 
                 scale = lower.localScale;
-                scale.y = Mathf.Lerp(scale.y, 1, Time.deltaTime * Easing);
+                scale.y = Mathf.Lerp(scale.y, 0, Time.deltaTime * Easing);
                 lower.localScale = scale;
             }
         }

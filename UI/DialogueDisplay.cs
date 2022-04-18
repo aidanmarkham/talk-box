@@ -139,6 +139,8 @@ public class DialogueDisplay : MSBehaviour
 
         NameText.text = d.Character.Name;
 
+        ProceedAction.action.Enable();
+
         var index = 0;
 
         // Get the text from the dialogue
@@ -206,7 +208,10 @@ public class DialogueDisplay : MSBehaviour
         {
             yield return null;
         }
-     
+
+
+        ProceedAction.action.Disable();
+
         // Emit an event saying the dialogue is over
         EventDispatcher.Dispatch(DialogueEvent.Prepare(d, false));
 

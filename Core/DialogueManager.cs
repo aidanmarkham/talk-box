@@ -1,3 +1,4 @@
+using Cinemachine;
 using MacSalad.Core;
 using MacSalad.Core.Events;
 using System;
@@ -18,12 +19,13 @@ namespace TalkBox.Core
 
 		public bool ManageCursor = true;
 
-		public enum GameState { Menu, Gameplay, Dialogue, Cutscene, Startup }
+		public enum GameState { Menu, Gameplay, Dialogue, Cutscene, Startup, Gameplay_Cinematic }
 
 		public GameState State = GameState.Gameplay;
 
 		private Keyboard keyboard;
 		private Mouse mouse;
+
 		protected override void SafeInitialize()
 		{
 			base.SafeInitialize();
@@ -52,7 +54,7 @@ namespace TalkBox.Core
 				case GameState.Menu:
 					if (ManageCursor)
 					{
-						Cursor.lockState = CursorLockMode.None;
+						Cursor.lockState = CursorLockMode.Confined;
 						Cursor.visible = true;
 					}
 					break;
@@ -87,9 +89,11 @@ namespace TalkBox.Core
 			switch (State)
 			{
 				case GameState.Startup:
-					SetState(GameState.Gameplay);
+					SetState(GameState.Menu);
 					break;
 				case GameState.Menu:
+					Cursor.lockState = CursorLockMode.None;
+					Cursor.visible = true;
 					break;
 				case GameState.Gameplay:
 					if (ManageCursor)

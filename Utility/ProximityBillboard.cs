@@ -22,8 +22,8 @@ namespace TalkBox.Utility
         public UnityEvent Hide;
 
         private Transform view;
-        private bool shown = true;
-
+        private bool shown = false;
+        public bool Shown => shown;
 
         // Start is called before the first frame update
         void Start()
