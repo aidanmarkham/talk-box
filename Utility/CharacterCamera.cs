@@ -37,8 +37,15 @@ namespace TalkBox.Utility
         private void DialogueStarted(DialogueEvent e)
 
         {
+
+            if(Character == null)
+			{
+                Character = GetComponentInParent<Character>().CharacterData;
+			}
+
             if (e.Started)
             {
+
                 if (e.Source.Character == Character)
                 {
                     Camera.Priority = ActivePriority;

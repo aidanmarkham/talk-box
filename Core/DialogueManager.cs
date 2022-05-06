@@ -23,6 +23,8 @@ namespace TalkBox.Core
 
 		public GameState State = GameState.Gameplay;
 
+		public GameObject CharacterPrefab;
+
 		private Keyboard keyboard;
 		private Mouse mouse;
 
@@ -185,6 +187,9 @@ namespace TalkBox.Core
 
 		public Character GetCharacter(CharacterData data)
 		{
+			Characters.Clear();
+			Characters.AddRange(FindObjectsOfType<Character>());
+
 			for (int i = 0; i < Characters.Count; i++)
 			{
 				if (Characters[i].CharacterData.ID == data.ID) return Characters[i];
