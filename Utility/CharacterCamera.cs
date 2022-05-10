@@ -1,4 +1,6 @@
-﻿using MacSalad.Core;
+﻿#if CINEMACHINE_PRESENT
+
+using MacSalad.Core;
 using MacSalad.Core.Events;
 using TalkBox.Core;
 using static TalkBox.Core.Events;
@@ -55,3 +57,4 @@ namespace TalkBox.Utility
         }
     }
 }
+#endif

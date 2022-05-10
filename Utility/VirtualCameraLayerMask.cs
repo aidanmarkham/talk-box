@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if CINEMACHINE_PRESENT
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
@@ -32,3 +33,4 @@ public class VirtualCameraLayerMask : MonoBehaviour
 
     
 }
+#endif

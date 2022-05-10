@@ -1,5 +1,4 @@
-﻿using Cinemachine;
-using MacSalad.Core;
+﻿using MacSalad.Core;
 using System.Collections;
 using System.Collections.Generic;
 using TalkBox.Core;
