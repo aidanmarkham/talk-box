@@ -179,7 +179,7 @@ namespace TalkBox.Core
                 if (Characters[i].CharacterData.ID == data.ID) return Characters[i];
             }
 
-            Debug.LogError("Character doesn't exist!");
+            Debug.LogWarning("Character doesn't exist!");
             return null;
         }
     }

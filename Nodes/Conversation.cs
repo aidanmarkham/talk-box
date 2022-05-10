@@ -6,7 +6,7 @@ using XNode;
 namespace TalkBox.Nodes
 {
 
-    [CreateAssetMenu]
+    [CreateAssetMenu(fileName = "Conversation", menuName = "TalkBox/Conversation", order = 1)]
     public class Conversation : NodeGraph
     {
 
@@ -43,7 +43,21 @@ namespace TalkBox.Nodes
                 return true;
             }
         }
+           
 
+        public bool Next(string option)
+		{
+            current.NextDialogue(option);
+
+            if (current == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         public static void CallActionsOnPort(NodePort exitPort)
         {
             var nextConnections = exitPort.GetConnections();

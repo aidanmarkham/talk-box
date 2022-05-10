@@ -7,7 +7,7 @@ using NaughtyAttributes;
 namespace TalkBox.Core
 {
 
-    [CreateAssetMenu(fileName = "Character", menuName = "Data/Character", order = 1)]
+    [CreateAssetMenu(fileName = "Character", menuName = "TalkBox/Character", order = 1)]
     public class CharacterData : ScriptableObject
     {
         public string Name;

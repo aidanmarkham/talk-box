@@ -23,6 +23,9 @@ namespace TalkBox.Nodes
         [Output]
         public Empty exit;
 
+        [Output(dynamicPortList = true)]
+        public string[] dialogueOptions;
+
         // Use this for initialization
         protected override void Init()
         {
@@ -51,7 +54,7 @@ namespace TalkBox.Nodes
             conversation.current = this;
         }
 
-        public void NextDialogue()
+        public void NextDialogue(string option = null)
         {
             // get a reference to the graph
             Conversation conversation = graph as Conversation;
@@ -61,11 +64,38 @@ namespace TalkBox.Nodes
             {
                 Debug.LogWarning("Node isn't active");
             }
+            
+            DialogueNode nextDialogue = null;
 
             // Get exit port
-            NodePort exitPort = GetOutputPort("exit");
+            NodePort exitPort = null;
 
-            DialogueNode nextDialogue = null;
+            // if an argument action was passed
+            if(option != null)
+			{
+                // loop through the dialogue options to find the one that matches 
+                for (int i = 0; i < dialogueOptions.Length; i++)
+                {
+                    if (dialogueOptions[i] == option)
+                    {
+                        // then grab the port that matches
+                        exitPort = GetOutputPort("dialogueOptions " + i);
+                    }
+                }
+
+                // confirm we actually have an exit port
+                if (exitPort == null)
+                {
+                    Debug.LogError("Couldn't find dialogue option.");
+                    return;
+                }
+            }
+            // otherwise
+            else
+            {
+                // use the exit port
+                exitPort = GetOutputPort("exit");
+            }
 
             Conversation.CallActionsOnPort(exitPort);
 
@@ -80,6 +110,8 @@ namespace TalkBox.Nodes
                 DialogueNode dialogueNode = currentConnection as DialogueNode;
 
                 LogicNode logicNode = currentConnection as LogicNode;
+
+                GoToNode entryNode = currentConnection as GoToNode;
 
                 if (dialogueNode)
                 {
@@ -99,6 +131,16 @@ namespace TalkBox.Nodes
                     }
 
                     nextDialogue = logicNode.RecurseToDialogue();
+                }
+
+                if(entryNode)
+				{
+                    if (nextDialogue != null)
+                    {
+                        Debug.LogWarning("Multiple dialogues connected to this exit.");
+                    }
+                    nextDialogue = entryNode.GetDestinationNode();
+
                 }
             }
             if (nextDialogue)

@@ -14,213 +14,278 @@ using TalkBox.Core;
 public class DialogueDisplay : MSBehaviour
 {
 
-    [Header("Parameters")]
-    public float LetterDelay = 0.01f;
-    public float SpaceDelay = 0.025f;
-    public float SentanceDelay = 0.05f;
+	[Header("Parameters")]
+	public float LetterDelay = 0.01f;
+	public float SpaceDelay = 0.025f;
+	public float SentanceDelay = 0.05f;
 
-    [Header("References")]
-    public TMP_Text DialogueText;
-    public TMP_Text NameText;
-    public UIFader Fader;
+	[Header("References")]
+	public TMP_Text DialogueText;
+	public TMP_Text NameText;
+	public UIFader Fader;
+	public DialogueOption dialogueOptionPrefab;
 
-    private bool ConversationInProgress = false;
+	private bool ConversationInProgress = false;
+	private Character speakingCharacter;
 
-    private Character speakingCharacter;
+	// A list of dialogue option buttons
+	private List<DialogueOption> dialogueOptions = new List<DialogueOption>();
 
-    protected override void SafeInitialize()
-    {
-        base.SafeInitialize();
-    }
+	// The recently selected option
+	private string selectedOption = null;
+	protected override void SafeInitialize()
+	{
+		base.SafeInitialize();
+	}
 
-    protected override void AddEventListeners()
-    {
-        base.AddEventListeners();
-        EventDispatcher.AddListener<ConversationEvent>(StartConversation);
-    }
+	protected override void AddEventListeners()
+	{
+		base.AddEventListeners();
+		EventDispatcher.AddListener<ConversationEvent>(StartConversation);
+	}
 
-    protected override void RemoveEventListeners()
-    {
-        base.RemoveEventListeners();
+	protected override void RemoveEventListeners()
+	{
+		base.RemoveEventListeners();
 
-        EventDispatcher.RemoveListener<ConversationEvent>(StartConversation);
-    }
+		EventDispatcher.RemoveListener<ConversationEvent>(StartConversation);
+	}
 
-    public void StartConversation(ConversationEvent e)
-    {
-        if (e.Started)
-        {
-            if (ConversationInProgress)
-            {
-                Debug.LogError("Tried to start conversation while one was in progress.");
-            }
+	public void StartConversation(ConversationEvent e)
+	{
+		if (e.Started)
+		{
+			if (ConversationInProgress)
+			{
+				Debug.LogError("Tried to start conversation while one was in progress.");
+			}
 
-            StartCoroutine(DisplayConversation(e.Conversation));
-        }
-    }
+			StartCoroutine(DisplayConversation(e.Conversation));
+		}
+	}
 
-    IEnumerator DisplayConversation(Conversation convo)
-    {
-        // Initialize the conversation
-        convo.Init();
+	IEnumerator DisplayConversation(Conversation convo)
+	{
+		// Initialize the conversation
+		convo.Init();
 
-        // get the current dialogue
-        DialogueNode current = convo.current;
+		// get the current dialogue
+		DialogueNode current = convo.current;
 
-        // Safety in case this conversation is empty
-        if (!current)
-        {
-            Debug.LogError("Tried to start empty conversation!");
-        }
-        
-        ConversationInProgress = true;
+		// Safety in case this conversation is empty
+		if (!current)
+		{
+			Debug.LogError("Tried to start empty conversation!");
+		}
 
-        DialogueManager.Instance.SetState(DialogueManager.GameState.Dialogue);
+		ConversationInProgress = true;
 
-        // Clear text box
-        DialogueText.text = "";
-        NameText.text = "";
+		DialogueManager.Instance.SetState(DialogueManager.GameState.Dialogue);
 
-        // And show it 
-        Fader.FadeIn();
+		// Clear text box
+		DialogueText.text = "";
+		NameText.text = "";
 
-        // Wait to make sure it's shown
-        yield return new WaitForSeconds(Fader.FadeInTime);
+		// hide all dialogue options that exist
+		for (int i = 0; i < dialogueOptions.Count; i++)
+		{
+			dialogueOptions[i].Clear();
+			dialogueOptions[i].gameObject.SetActive(false);
+		}
 
-        // while there's still dialogue to be had
-        while (current != null)
-        {
-            // Show the dialogue
-            yield return StartCoroutine(DisplayDialogue(current));
+		// And show it 
+		Fader.FadeIn();
 
-            // attempt to move to the next node 
-            if (convo.Next())
-            {
-                // if we can, set it to current
-                current = convo.current;
-            }
-            else
-            {
+		// Wait to make sure it's shown
+		yield return new WaitForSeconds(Fader.FadeInTime);
 
-                // otherwise, the conversation is over
-                current = null;
+		// while there's still dialogue to be had
+		while (current != null)
+		{
+			// Show the dialogue
+			yield return StartCoroutine(DisplayDialogue(current));
 
-                // hide the text box
-                Fader.FadeOut();
+			// attempt to move to the next node 
+			if (convo.Next(selectedOption))
+			{
+				// if we can, set it to current
+				current = convo.current;
+			}
+			else
+			{
+				// otherwise, the conversation is over
+				current = null;
 
-                // wait to make sure it's gone
-                yield return new WaitForSeconds(Fader.FadeOutTime);
-            }
-        }
+				// hide the text box
+				Fader.FadeOut();
 
-        ConversationInProgress = false;
+				// wait to make sure it's gone
+				yield return new WaitForSeconds(Fader.FadeOutTime);
+			}
+		}
 
-        // Dispatch an event saying this conversation is over
-        EventDispatcher.Dispatch(ConversationEvent.Prepare(convo, false));
+		ConversationInProgress = false;
 
-        // Return the game state to gameplay
-        DialogueManager.Instance.SetState(DialogueManager.GameState.Gameplay);
+		// Dispatch an event saying this conversation is over
+		EventDispatcher.Dispatch(ConversationEvent.Prepare(convo, false));
 
-    }
+		// Return the game state to gameplay
+		DialogueManager.Instance.SetState(DialogueManager.GameState.Gameplay);
 
-    IEnumerator DisplayDialogue(DialogueNode d)
-    {
-        // emit dialogue started event
-        EventDispatcher.Dispatch(DialogueEvent.Prepare(d, true));
+	}
 
-        // Find the speaking character
-        speakingCharacter = DialogueManager.Instance.GetCharacter(d.Character);
+	IEnumerator DisplayDialogue(DialogueNode d)
+	{
+		// emit dialogue started event
+		EventDispatcher.Dispatch(DialogueEvent.Prepare(d, true));
 
-        // Clear the text box
-        DialogueText.text = "";
+		// Find the speaking character
+		speakingCharacter = DialogueManager.Instance.GetCharacter(d.Character);
 
-        NameText.text = d.Character.Name;
+		// Clear the text box
+		DialogueText.text = "";
 
-        var index = 0;
+		NameText.text = d.Character.Name;
 
-        // Get the text from the dialogue
-        var rawText = d.Text;
+		// Hide all dialogue options 
+		for (int i = 0; i < dialogueOptions.Count; i++)
+		{
+			dialogueOptions[i].gameObject.SetActive(false);
+		}
 
-        // Wait a frame to avoid accidentally skipping to next dialogue
-        yield return null;
+		// Show as many as we'll need for this dialogue
+		if (d.dialogueOptions.Length > 0)
+		{
+			// if there's ever more options than there are buttons, spawn some more
+			while (d.dialogueOptions.Length > dialogueOptions.Count)
+			{
+				dialogueOptions.Add(Instantiate(dialogueOptionPrefab, transform.parent));
+			}
+			for (int i = 0; i < d.dialogueOptions.Length; i++)
+			{
+				dialogueOptions[i].gameObject.SetActive(true);
 
-        // While there's letters left to show
-        while (index < rawText.Length)
-        {
-            if(Input.GetMouseButtonUp(0))
-            {
-                index = rawText.Length - 1;
-            }
-            // get a version of the text we can modify
-            var currentText = rawText;
+				// Clear the options so the player can't click or read the options while the text is scrolling
+				dialogueOptions[i].Clear();
+			}
+		}
 
-            if (rawText[index] == '<')
-            {
-                while (index < rawText.Length && rawText[index] != '>')
-                {
-                    index++;
-                }
-            }
+		var index = 0;
 
-            // Insert the alpha tag to hide text after the index
-            currentText = currentText.Insert(index + 1, "<alpha=#00>");
-            currentText += "<\\alpha>";
+		// Get the text from the dialogue
+		var rawText = d.Text;
 
-            // Display the text 
-            DialogueText.text = currentText;
+		// Wait a frame to avoid accidentally skipping to next dialogue
+		yield return null;
 
-            
+		// While there's letters left to show
+		while (index < rawText.Length)
+		{
+			if (Input.GetMouseButtonUp(0))
+			{
+				index = rawText.Length - 1;
+			}
+			// get a version of the text we can modify
+			var currentText = rawText;
 
-            // Wait for a while depending on what character we just showed
-            if (Char.IsLetterOrDigit(rawText[index]))
-            {
-                EventDispatcher.Dispatch(SpeakingEvent.Prepare(d.Character, rawText[index], LetterDelay));
-                yield return StartCoroutine(SkippableWaitForSeconds(LetterDelay));
-            }
-            else if (rawText[index] == '.')
-            {
-                yield return StartCoroutine(SkippableWaitForSeconds(SentanceDelay));
-            }
-            else if (rawText[index] == ' ')
-            {
-                yield return StartCoroutine(SkippableWaitForSeconds(SpaceDelay));
-            }
-            else
-            {
-                yield return StartCoroutine(SkippableWaitForSeconds(LetterDelay));
-            }
-            
+			if (rawText[index] == '<')
+			{
+				while (index < rawText.Length && rawText[index] != '>')
+				{
+					index++;
+				}
+			}
 
-            // Go to the next character
-            index++;         
-        }
+			// Insert the alpha tag to hide text after the index
+			currentText = currentText.Insert(index + 1, "<alpha=#00>");
+			currentText += "<\\alpha>";
 
-        // Wait a frame to avoid accidentally skipping to next dialogue
-        yield return null;
+			// Display the text 
+			DialogueText.text = currentText;
 
-        // If we're supposed to wait for input, wait for that here
-        while (d.WaitForInput && !Input.GetMouseButtonUp(0))
-        {
-            yield return null;
-        }
-     
-        // Emit an event saying the dialogue is over
-        EventDispatcher.Dispatch(DialogueEvent.Prepare(d, false));
+			// Wait for a while depending on what character we just showed
+			if (Char.IsLetterOrDigit(rawText[index]))
+			{
+				EventDispatcher.Dispatch(SpeakingEvent.Prepare(d.Character, rawText[index], LetterDelay));
+				yield return StartCoroutine(SkippableWaitForSeconds(LetterDelay));
+			}
+			else if (rawText[index] == '.')
+			{
+				yield return StartCoroutine(SkippableWaitForSeconds(SentanceDelay));
+			}
+			else if (rawText[index] == ' ')
+			{
+				yield return StartCoroutine(SkippableWaitForSeconds(SpaceDelay));
+			}
+			else
+			{
+				yield return StartCoroutine(SkippableWaitForSeconds(LetterDelay));
+			}
 
-    }
+			// Go to the next character
+			index++;
+		}
 
-    IEnumerator SkippableWaitForSeconds(float time)
-    {
-        var start = Time.time;
+		// Wait a frame to avoid accidentally skipping to next dialogue
+		yield return null;
 
-        while (Time.time < start + time)
-        {
-            yield return null;
+		// Clear the last selected option
+		selectedOption = null;
 
-            if (Input.GetMouseButtonUp(0))
-            {
-                break;
-            }
-        }
-    }
+		// If there's dialogue options, display them
+		if (d.dialogueOptions.Length > 0)
+		{
+			// if there's ever more options than there are buttons, spawn some more
+			while (d.dialogueOptions.Length > dialogueOptions.Count)
+			{
+				dialogueOptions.Add(Instantiate(dialogueOptionPrefab, transform.parent));
+			}
+
+			// Show as many buttons as there are options, and set them up 
+			for (int i = 0; i < d.dialogueOptions.Length; i++)
+			{
+				dialogueOptions[i].gameObject.SetActive(true);
+				dialogueOptions[i].Setup(d.dialogueOptions[i], this);			
+			}
+
+			// the button's onclick has been set to a method that will make selected option not null
+			while (selectedOption == null)
+			{
+				yield return null;
+			}
+		}
+		// otherwise wait for any input
+		else
+		{
+			// If we're supposed to wait for input, wait for that here
+			while (d.WaitForInput && !Input.GetMouseButtonUp(0))
+			{
+				yield return null;
+			}
+		}
+
+		// Emit an event saying the dialogue is over
+		EventDispatcher.Dispatch(DialogueEvent.Prepare(d, false));
+
+	}
+
+	public void SetSelectedOption(string option)
+	{
+		selectedOption = option;
+	}
+
+	IEnumerator SkippableWaitForSeconds(float time)
+	{
+		var start = Time.time;
+
+		while (Time.time < start + time)
+		{
+			yield return null;
+
+			if (Input.GetMouseButtonUp(0))
+			{
+				break;
+			}
+		}
+	}
 }

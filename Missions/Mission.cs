@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TalkBox.Missions
 {
-    [CreateAssetMenu(fileName = "New Mission", menuName = "Data/Mission", order = 1)]
+    [CreateAssetMenu(fileName = "New Mission", menuName = "TalkBox/Mission", order = 1)]
     public class Mission : ScriptableObject
     {
         public Mission MissionTag;

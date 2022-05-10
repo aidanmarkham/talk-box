@@ -1,5 +1,391 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5874165929321564812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 88, y: 904}
+  ports:
+    keys:
+    - enter
+    - exit
+    - dialogueOptions
+    values:
+    - _fieldName: enter
+      _node: {fileID: -5874165929321564812}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: dialogueOptions 1
+        node: {fileID: -3628385242198298309}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: -5874165929321564812}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: 6313599809916619360}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions
+      _node: {fileID: -5874165929321564812}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Character: {fileID: 11400000, guid: b13383f1126577a4c8d60c41b578e642, type: 2}
+  Text: I was wondering what you've been up to?
+  WaitForInput: 1
+  dialogueOptions: []
+--- !u!114 &-4257983288362608230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -968, y: 728}
+  ports:
+    keys:
+    - enter
+    - exit
+    - dialogueOptions
+    values:
+    - _fieldName: enter
+      _node: {fileID: -4257983288362608230}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: -4257983288362608230}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: 5225439882951729744}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions
+      _node: {fileID: -4257983288362608230}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Character: {fileID: 11400000, guid: b13383f1126577a4c8d60c41b578e642, type: 2}
+  Text: 'Hey, Person 2...
+
+'
+  WaitForInput: 1
+  dialogueOptions: []
+--- !u!114 &-3628385242198298309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -216, y: 728}
+  ports:
+    keys:
+    - enter
+    - exit
+    - dialogueOptions
+    - dialogueOptions 0
+    - dialogueOptions 1
+    values:
+    - _fieldName: enter
+      _node: {fileID: -3628385242198298309}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: exit
+        node: {fileID: 1418320564961746808}
+        reroutePoints: []
+      - fieldName: exit
+        node: {fileID: -3475005472199336914}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: -3628385242198298309}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions
+      _node: {fileID: -3628385242198298309}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions 0
+      _node: {fileID: -3628385242198298309}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: enter
+        node: {fileID: 330706968274962569}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: dialogueOptions 1
+      _node: {fileID: -3628385242198298309}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: enter
+        node: {fileID: -5874165929321564812}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Character: {fileID: 11400000, guid: 5595d63404741c84d840d4cfebeef21f, type: 2}
+  Text: Alright, shoot.
+  WaitForInput: 1
+  dialogueOptions:
+  - How are you?
+  - What's up?
+--- !u!114 &-3475005472199336914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -504, y: 728}
+  ports:
+    keys:
+    - enter
+    - exit
+    - dialogueOptions
+    values:
+    - _fieldName: enter
+      _node: {fileID: -3475005472199336914}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: exit
+        node: {fileID: 5225439882951729744}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: -3475005472199336914}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: -3628385242198298309}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions
+      _node: {fileID: -3475005472199336914}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Character: {fileID: 11400000, guid: b13383f1126577a4c8d60c41b578e642, type: 2}
+  Text: 'I have a question for you!
+
+'
+  WaitForInput: 1
+  dialogueOptions: []
+--- !u!114 &-3018440288436117728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 632, y: 760}
+  ports:
+    keys:
+    - enter
+    - exit
+    - dialogueOptions
+    - dialogueOptions 0
+    - dialogueOptions 1
+    values:
+    - _fieldName: enter
+      _node: {fileID: -3018440288436117728}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: exit
+        node: {fileID: 5825508821300467497}
+        reroutePoints: []
+      - fieldName: exit
+        node: {fileID: 6313599809916619360}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: -3018440288436117728}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions
+      _node: {fileID: -3018440288436117728}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions 0
+      _node: {fileID: -3018440288436117728}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: enter
+        node: {fileID: 1985701441971655373}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: dialogueOptions 1
+      _node: {fileID: -3018440288436117728}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: enter
+        node: {fileID: 6217071785295965265}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  Character: {fileID: 11400000, guid: 5595d63404741c84d840d4cfebeef21f, type: 2}
+  Text: 'Was there something else you wanted to ask?
+
+'
+  WaitForInput: 1
+  dialogueOptions:
+  - Nah.
+  - Actually...
+--- !u!114 &-997921204433815465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4273a7fa74397da41971afe26e6ed872, type: 3}
+  m_Name: Go To
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1144, y: 1048}
+  ports:
+    keys:
+    - enter
+    - exit
+    values:
+    - _fieldName: enter
+      _node: {fileID: -997921204433815465}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: exit
+        node: {fileID: 6217071785295965265}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: -997921204433815465}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  ID: 
+  Destination: Top
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,11 +399,22 @@ MonoBehaviour:
   m_Name: Example Conversation
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 878943292865314247}
-  - {fileID: 1369949300353472691}
-  Entry: {fileID: 878943292865314247}
-  current: {fileID: 0}
---- !u!114 &878943292865314247
+  - {fileID: 1418320564961746808}
+  - {fileID: -4257983288362608230}
+  - {fileID: 5225439882951729744}
+  - {fileID: -3475005472199336914}
+  - {fileID: -3628385242198298309}
+  - {fileID: 330706968274962569}
+  - {fileID: -5874165929321564812}
+  - {fileID: 5825508821300467497}
+  - {fileID: -3018440288436117728}
+  - {fileID: 6313599809916619360}
+  - {fileID: 6217071785295965265}
+  - {fileID: 1985701441971655373}
+  - {fileID: -997921204433815465}
+  Entry: {fileID: -4257983288362608230}
+  current: {fileID: -4257983288362608230}
+--- !u!114 &330706968274962569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,76 +427,379 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -392, y: -72}
+  position: {x: 88, y: 616}
   ports:
     keys:
     - enter
     - exit
+    - dialogueOptions
     values:
     - _fieldName: enter
-      _node: {fileID: 878943292865314247}
+      _node: {fileID: 330706968274962569}
       _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: dialogueOptions 0
+        node: {fileID: -3628385242198298309}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: exit
-      _node: {fileID: 878943292865314247}
+      _node: {fileID: 330706968274962569}
       _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: enter
-        node: {fileID: 1369949300353472691}
+        node: {fileID: 5825508821300467497}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  Character: {fileID: 11400000, guid: 5595d63404741c84d840d4cfebeef21f, type: 2}
-  Text: Hi there :)
-  WaitForInput: 1
---- !u!114 &1369949300353472691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: -88, y: -56}
-  ports:
-    keys:
-    - enter
-    - exit
-    values:
-    - _fieldName: enter
-      _node: {fileID: 1369949300353472691}
-      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: exit
-        node: {fileID: 878943292865314247}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: exit
-      _node: {fileID: 1369949300353472691}
-      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+    - _fieldName: dialogueOptions
+      _node: {fileID: 330706968274962569}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
       connections: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   Character: {fileID: 11400000, guid: b13383f1126577a4c8d60c41b578e642, type: 2}
-  Text: Hi to u 2 :)
+  Text: 'I was wondering how you''ve been doing lately?
+
+'
   WaitForInput: 1
+  dialogueOptions: []
+--- !u!114 &1418320564961746808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4273a7fa74397da41971afe26e6ed872, type: 3}
+  m_Name: Go To
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -504, y: 536}
+  ports:
+    keys:
+    - enter
+    - exit
+    values:
+    - _fieldName: enter
+      _node: {fileID: 1418320564961746808}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: 1418320564961746808}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: -3628385242198298309}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  ID: Top
+  Destination: Entry
+--- !u!114 &1985701441971655373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 920, y: 616}
+  ports:
+    keys:
+    - enter
+    - exit
+    - dialogueOptions
+    values:
+    - _fieldName: enter
+      _node: {fileID: 1985701441971655373}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: dialogueOptions 0
+        node: {fileID: -3018440288436117728}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: 1985701441971655373}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions
+      _node: {fileID: 1985701441971655373}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Character: {fileID: 11400000, guid: b13383f1126577a4c8d60c41b578e642, type: 2}
+  Text: 'Nope, that''s all. See ya!
+
+'
+  WaitForInput: 1
+  dialogueOptions: []
+--- !u!114 &5225439882951729744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -744, y: 728}
+  ports:
+    keys:
+    - enter
+    - exit
+    - dialogueOptions
+    values:
+    - _fieldName: enter
+      _node: {fileID: 5225439882951729744}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: exit
+        node: {fileID: -4257983288362608230}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: 5225439882951729744}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: -3475005472199336914}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions
+      _node: {fileID: 5225439882951729744}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Character: {fileID: 11400000, guid: 5595d63404741c84d840d4cfebeef21f, type: 2}
+  Text: 'Hey there Person 1!
+
+'
+  WaitForInput: 1
+  dialogueOptions: []
+--- !u!114 &5825508821300467497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 344, y: 616}
+  ports:
+    keys:
+    - enter
+    - exit
+    - dialogueOptions
+    values:
+    - _fieldName: enter
+      _node: {fileID: 5825508821300467497}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: exit
+        node: {fileID: 330706968274962569}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: 5825508821300467497}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: -3018440288436117728}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions
+      _node: {fileID: 5825508821300467497}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Character: {fileID: 11400000, guid: 5595d63404741c84d840d4cfebeef21f, type: 2}
+  Text: I've been doing pretty well!
+  WaitForInput: 1
+  dialogueOptions: []
+--- !u!114 &6217071785295965265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 920, y: 936}
+  ports:
+    keys:
+    - enter
+    - exit
+    - dialogueOptions
+    values:
+    - _fieldName: enter
+      _node: {fileID: 6217071785295965265}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: dialogueOptions 1
+        node: {fileID: -3018440288436117728}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: 6217071785295965265}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: -997921204433815465}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions
+      _node: {fileID: 6217071785295965265}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Character: {fileID: 11400000, guid: b13383f1126577a4c8d60c41b578e642, type: 2}
+  Text: 'I did actually want to ask one more thing...
+
+'
+  WaitForInput: 1
+  dialogueOptions: []
+--- !u!114 &6313599809916619360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4459341537c84647bafd4dd48aa93cd, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 344, y: 904}
+  ports:
+    keys:
+    - enter
+    - exit
+    - dialogueOptions
+    values:
+    - _fieldName: enter
+      _node: {fileID: 6313599809916619360}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: exit
+        node: {fileID: -5874165929321564812}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: 6313599809916619360}
+      _typeQualifiedName: TalkBox.Nodes.DialogueNode+Empty, TalkBox, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: -3018440288436117728}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: dialogueOptions
+      _node: {fileID: 6313599809916619360}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Character: {fileID: 11400000, guid: 5595d63404741c84d840d4cfebeef21f, type: 2}
+  Text: Just existing in the void, bud.
+  WaitForInput: 1
+  dialogueOptions: []
