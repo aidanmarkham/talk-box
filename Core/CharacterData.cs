@@ -18,5 +18,17 @@ namespace TalkBox.Core
         {
             ID = Guid.NewGuid().ToString();
         }
+
+        public static bool operator ==(CharacterData lhs, CharacterData rhs)
+        {
+            if (!lhs && !rhs) return true;
+            if (!lhs || !rhs) return false;
+            return lhs.ID == rhs.ID;
+        }
+
+        public static bool operator !=(CharacterData lhs, CharacterData rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 }

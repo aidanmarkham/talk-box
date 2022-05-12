@@ -15,7 +15,7 @@ namespace TalkBox.Core
         public CharacterData ProtagonistData;
         public Character Protagonist => GetCharacter(ProtagonistData);
 
-        private List<Character> Characters = new List<Character>();
+        public List<Character> Characters = new List<Character>();
 
         public bool ManageCursor = true;
 
