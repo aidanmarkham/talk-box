@@ -82,6 +82,7 @@ namespace TalkBox.Nodes
 		public List<string> GetParticipantIDs()
 		{
 
+			// todo: rebuilding the list every time this is called is really expensive
 			participantIDs.Clear();
 
 			foreach (Node node in nodes)
@@ -104,6 +105,7 @@ namespace TalkBox.Nodes
 		public List<CharacterData> GetParticipants()
 		{
 
+			// todo: rebuilding the list every time this is called is really expensive
 			participants.Clear();
 
 			foreach (Node node in nodes)
