@@ -16,6 +16,16 @@ namespace TalkBox.Missions
         public MissionManager.MissionState Completion = MissionManager.MissionState.NotStarted;
 
         
+        public static bool operator ==(Mission lhs, Mission rhs)
+        {
+            if (!lhs && !rhs) return true;
+            if (!lhs || !rhs) return false;
+            return lhs.ID == rhs.ID;
+        }
 
+        public static bool operator !=(Mission lhs, Mission rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 }
