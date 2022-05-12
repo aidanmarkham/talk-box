@@ -15,8 +15,8 @@ namespace TalkBox.Nodes
 
 		public DialogueNode current;
 
-		private List<string> participantIDs;
-		private List<CharacterData> participants;
+		private List<string> participantIDs = null;
+		private List<CharacterData> participants = null;
 
 		public void Init()
 		{
@@ -81,44 +81,44 @@ namespace TalkBox.Nodes
 
 		public List<string> GetParticipantIDs()
 		{
-
-			participantIDs.Clear();
-
-			foreach (Node node in nodes)
+			if (participantIDs == null || participantIDs.Count == 0)
 			{
-				DialogueNode dNode = node as DialogueNode;
-
-				if (dNode != null)
+				participantIDs = new List<string>();
+				foreach (Node node in nodes)
 				{
-					if (!participantIDs.Contains(dNode.Character.ID))
+					DialogueNode dNode = node as DialogueNode;
+
+					if (dNode != null)
 					{
-						participantIDs.Add(dNode.Character.ID);
+						if (!participantIDs.Contains(dNode.Character.ID))
+						{
+							participantIDs.Add(dNode.Character.ID);
+						}
 					}
 				}
 			}
-
 
 			return participantIDs;
 		}
 
 		public List<CharacterData> GetParticipants()
 		{
-
-			participants.Clear();
-
-			foreach (Node node in nodes)
+			if (participants == null || participants.Count == 0)
 			{
-				DialogueNode dNode = node as DialogueNode;
-
-				if (dNode != null)
+				participants = new List<CharacterData>();
+				foreach (Node node in nodes)
 				{
-					if (!participants.Contains(dNode.Character))
+					DialogueNode dNode = node as DialogueNode;
+
+					if (dNode != null)
 					{
-						participants.Add(dNode.Character);
+						if (!participants.Contains(dNode.Character))
+						{
+							participants.Add(dNode.Character);
+						}
 					}
 				}
 			}
-
 
 			return participants;
 		}
