@@ -3,8 +3,10 @@ using MacSalad.Core.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TalkBox.Nodes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static TalkBox.Core.Events;
 
 namespace TalkBox.Core
 {
@@ -20,6 +22,9 @@ namespace TalkBox.Core
         public enum GameState { Menu, Gameplay, Dialogue, Cutscene, Startup }
 
         public GameState State = GameState.Gameplay;
+
+        // TEST
+        public Conversation PollimeroConversation;
 
         protected override void SafeInitialize()
         {
@@ -85,6 +90,10 @@ namespace TalkBox.Core
                 case GameState.Menu:
                     break;
                 case GameState.Gameplay:
+                    if(Input.GetKeyDown(KeyCode.P))
+					{
+                        EventDispatcher.Dispatch(ConversationEvent.Prepare(PollimeroConversation, true));
+					}
                     if (ManageCursor)
                     {
                         // Cursor Locking 
@@ -176,6 +185,11 @@ namespace TalkBox.Core
         {
             for (int i = 0; i < Characters.Count; i++)
             {
+                if(Characters[i].CharacterData == null)
+				{
+                    continue;
+				}
+
                 if (Characters[i].CharacterData.ID == data.ID) return Characters[i];
             }
 

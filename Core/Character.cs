@@ -13,7 +13,7 @@ namespace TalkBox.Core
         {
             base.SafeInitialize();
 
-            CharacterData = Instantiate(CharacterData);
+            if(CharacterData != null) CharacterData = Instantiate(CharacterData);
         }
     }
 }

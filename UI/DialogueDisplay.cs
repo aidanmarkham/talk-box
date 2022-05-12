@@ -25,6 +25,8 @@ public class DialogueDisplay : MSBehaviour
 	public UIFader Fader;
 	public DialogueOption dialogueOptionPrefab;
 
+	public GameObject ContinuePrompt;
+
 	private bool ConversationInProgress = false;
 	private Character speakingCharacter;
 
@@ -93,6 +95,9 @@ public class DialogueDisplay : MSBehaviour
 			dialogueOptions[i].gameObject.SetActive(false);
 		}
 
+		// Hide the continue prompt
+		ContinuePrompt.SetActive(false);
+
 		// And show it 
 		Fader.FadeIn();
 
@@ -146,6 +151,9 @@ public class DialogueDisplay : MSBehaviour
 		DialogueText.text = "";
 
 		NameText.text = d.Character.Name;
+
+		// Hide the continue prompt
+		ContinuePrompt.SetActive(false);
 
 		// Hide all dialogue options 
 		for (int i = 0; i < dialogueOptions.Count; i++)
@@ -257,6 +265,8 @@ public class DialogueDisplay : MSBehaviour
 		// otherwise wait for any input
 		else
 		{
+			// Show that continue prompt if we're waiting for input
+			ContinuePrompt.SetActive(true);
 			// If we're supposed to wait for input, wait for that here
 			while (d.WaitForInput && !Input.GetMouseButtonUp(0))
 			{

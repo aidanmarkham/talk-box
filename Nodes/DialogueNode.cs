@@ -17,6 +17,8 @@ namespace TalkBox.Nodes
 
         public bool WaitForInput = true;
 
+        public Conversation Conversation => graph as Conversation;
+
         [Input]
         public Empty enter;
 
