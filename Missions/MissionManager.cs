@@ -1,4 +1,5 @@
-﻿using MacSalad.Core;
+﻿using System.Collections.Generic;
+using MacSalad.Core;
 using MacSalad.Core.Events;
 using TMPro;
 
@@ -6,7 +7,7 @@ namespace TalkBox.Missions
 {
     public class MissionManager : SingletonMB<MissionManager>
     {
-        public Mission[] Missions;
+        public List<Mission> Missions;
         public TMP_Text MissionDisplay;
         public enum MissionState
         {
@@ -44,7 +45,7 @@ namespace TalkBox.Missions
 
         private void Mission_Event(MissionEvent e)
         {
-            for (int i = 0; i < Missions.Length; i++)
+            for (int i = 0; i < Missions.Count; i++)
             {
                 if (Missions[i].ID == e.Mission.ID)
                 {
@@ -55,7 +56,7 @@ namespace TalkBox.Missions
 
         private void InstantiateMissions()
         {
-            for (int i = 0; i < Missions.Length; i++)
+            for (int i = 0; i < Missions.Count; i++)
             {
                 Missions[i] = Instantiate(Missions[i]);
             }
@@ -69,7 +70,7 @@ namespace TalkBox.Missions
         public void UpdateText()
         {
             string text = "";
-            for (int i = 0; i < Missions.Length; i++)
+            for (int i = 0; i < Missions.Count; i++)
             {
                 if (Missions[i].Completion != MissionState.NotStarted)
                 {
@@ -92,7 +93,7 @@ namespace TalkBox.Missions
 
         public MissionState GetMissionState(Mission m)
         {
-            for (int i = 0; i < Missions.Length; i++)
+            for (int i = 0; i < Missions.Count; i++)
             {
                 if (Missions[i].ID == m.ID)
                 {
