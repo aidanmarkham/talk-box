@@ -1,20 +1,33 @@
 ﻿using System.Collections.Generic;
 using MacSalad.Core;
 using MacSalad.Core.Events;
+using MacSalad.Core.Utility;
 using TMPro;
 
 namespace TalkBox.Missions
 {
 	public class MissionManager : SingletonMB<MissionManager>
 	{
-		public List<Mission> Missions;
+		private List<Mission> missions = new List<Mission>();
 		public TMP_Text MissionDisplay;
+
+		public IReadOnlyList<Mission> Missions => missions;
 
 		public enum MissionState
 		{
 			NotStarted,
 			InProgress,
 			Complete
+		}
+
+		public bool HasMission(Mission mission)
+		{
+			return missions.Contains(mission);
+		}
+
+		public void AddMission(Mission mission)
+		{
+			missions.Add(RuntimeInstanceManager.GetRuntimeInstance(mission));
 		}
 
 		protected override void SetInstance()
@@ -46,30 +59,31 @@ namespace TalkBox.Missions
 
 		private void Mission_Event(MissionEvent e)
 		{
-			for (int i = 0; i < Missions.Count; i++)
+			for (int i = 0; i < missions.Count; i++)
 			{
-				if (Missions[i].ID == e.Mission.ID)
+				if (missions[i].ID == e.Mission.ID)
 				{
-					Missions[i].Completion = e.State;
+					missions[i].Completion = e.State;
+					missions[i].OnStateChanged();
 				}
 			}
 		}
 
 		private void InstantiateMissions()
 		{
-			for (int i = 0; i < Missions.Count; i++)
+			for (int i = 0; i < missions.Count; i++)
 			{
-				Missions[i] = Instantiate(Missions[i]);
+				missions[i] = Instantiate(missions[i]);
 			}
 		}
 
 		public MissionState GetMissionState(Mission m)
 		{
-			for (int i = 0; i < Missions.Count; i++)
+			for (int i = 0; i < missions.Count; i++)
 			{
-				if (Missions[i].ID == m.ID)
+				if (missions[i].ID == m.ID)
 				{
-					return Missions[i].Completion;
+					return missions[i].Completion;
 				}
 			}
 
