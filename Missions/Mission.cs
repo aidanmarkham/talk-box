@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TalkBox.Missions
 {
@@ -9,8 +10,16 @@ namespace TalkBox.Missions
     public class Mission : ScriptableObject
     {
         public Mission MissionTag;
+        
         [TextArea]
-        public string DisplayText;
+        [FormerlySerializedAs("DisplayText")]
+        [SerializeField] protected string displayText;
+
+        public virtual string DisplayText
+        {
+            get => displayText;
+            set => displayText = value;
+        }
 
         public string ID = Guid.NewGuid().ToString();
 
