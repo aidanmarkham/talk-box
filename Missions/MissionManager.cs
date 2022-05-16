@@ -62,35 +62,6 @@ namespace TalkBox.Missions
             }
         }
 
-
-        private void Update()
-        {
-            UpdateText();
-        }
-        public void UpdateText()
-        {
-            string text = "";
-            for (int i = 0; i < Missions.Count; i++)
-            {
-                if (Missions[i].Completion != MissionState.NotStarted)
-                {
-                    string prefix = "";
-
-                    if (Missions[i].Completion == MissionState.InProgress)
-                    {
-                        prefix += "☐ ";
-                    }
-                    else
-                    {
-                        prefix += "☑ ";
-                    }
-
-                    text += prefix + Missions[i].DisplayText + "\n";
-                }
-            }
-            MissionDisplay.text = text;
-        }
-
         public MissionState GetMissionState(Mission m)
         {
             for (int i = 0; i < Missions.Count; i++)
