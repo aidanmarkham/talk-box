@@ -23,9 +23,6 @@ namespace TalkBox.Core
 
         public GameState State = GameState.Gameplay;
 
-        // TEST
-        public Conversation PollimeroConversation;
-
         protected override void SafeInitialize()
         {
             base.SafeInitialize();
@@ -90,10 +87,6 @@ namespace TalkBox.Core
                 case GameState.Menu:
                     break;
                 case GameState.Gameplay:
-                    if(Input.GetKeyDown(KeyCode.P))
-					{
-                        EventDispatcher.Dispatch(ConversationEvent.Prepare(PollimeroConversation, true));
-					}
                     if (ManageCursor)
                     {
                         // Cursor Locking 
