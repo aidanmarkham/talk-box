@@ -14,7 +14,6 @@ namespace TalkBox.Missions
         public string ID = Guid.NewGuid().ToString();
 
         public MissionManager.MissionState Completion = MissionManager.MissionState.NotStarted;
-
         
         public static bool operator ==(Mission lhs, Mission rhs)
         {
