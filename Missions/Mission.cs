@@ -9,6 +9,7 @@ namespace TalkBox.Missions
     public class Mission : ScriptableObject
     {
         public Mission MissionTag;
+        [TextArea]
         public string DisplayText;
 
         public string ID = Guid.NewGuid().ToString();
