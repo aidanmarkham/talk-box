@@ -22,6 +22,7 @@ namespace TalkBox.Missions
 
 		public bool HasMission(Mission mission)
 		{
+			mission = RuntimeInstanceManager.GetRuntimeInstance(mission);
 			return missions.Contains(mission);
 		}
 
