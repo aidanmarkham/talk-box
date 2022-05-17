@@ -10,6 +10,7 @@ using MacSalad.Core.Events;
 using static TalkBox.Core.Events;
 using TalkBox.Nodes;
 using TalkBox.Core;
+using UnityEngine.UI;
 
 public class DialogueDisplay : MSBehaviour
 {
@@ -29,6 +30,10 @@ public class DialogueDisplay : MSBehaviour
 
 	private bool ConversationInProgress = false;
 	private Character speakingCharacter;
+
+	public Image HeaderBackground;
+	public Color HeaderTextLight;
+	public Color HeaderTextDark;
 
 	// A list of dialogue option buttons
 	private List<DialogueOption> dialogueOptions = new List<DialogueOption>();
@@ -151,6 +156,20 @@ public class DialogueDisplay : MSBehaviour
 		DialogueText.text = "";
 
 		NameText.text = d.Character.Name;
+
+		HeaderBackground.color = d.Character.CharacterColor;
+
+		Color.RGBToHSV(d.Character.CharacterColor, out float H, out float S, out float V);
+
+		// this is a light colored backgroud
+		if (V > 0.5f)
+		{
+			NameText.color = HeaderTextDark;
+		}
+		else
+		{
+			NameText.color = HeaderTextLight;
+		}
 
 		// Hide the continue prompt
 		ContinuePrompt.SetActive(false);

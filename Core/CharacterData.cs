@@ -11,7 +11,7 @@ namespace TalkBox.Core
     public class CharacterData : ScriptableObject
     {
         public string Name;
-
+        public Color CharacterColor = new Color(21f/255f, 26f/255f, 34f/255f);
         public string ID = Guid.NewGuid().ToString();
         [Button]
         public void GenerateNewID()
