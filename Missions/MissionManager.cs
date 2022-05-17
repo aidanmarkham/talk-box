@@ -62,7 +62,7 @@ namespace TalkBox.Missions
 		{
 			for (int i = 0; i < missions.Count; i++)
 			{
-				if (missions[i].ID == e.Mission.ID)
+				if (missions[i].ID == e.Mission.ID && missions[i].Completion != e.State)
 				{
 					missions[i].Completion = e.State;
 					missions[i].OnStateChanged();

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TalkBox.Core;
 using TalkBox.Nodes;
 using UnityEngine;
 
@@ -47,7 +48,8 @@ namespace TalkBox.Utility
 
         public override void OnInteraction()
         {
-            EventDispatcher.Dispatch(ConversationEvent.Prepare(conversation, true));
+            // EventDispatcher.Dispatch(ConversationEvent.Prepare(conversation, true));
+            DialogueManager.Instance.StartConversation(conversation);
 
             base.OnInteraction();
         }

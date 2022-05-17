@@ -11,7 +11,7 @@ namespace TalkBox.Core
         // Called when a conversation is started or ended
         public class ConversationEvent : MSEvent
         {
-            public static ConversationEvent Prepare(
+            internal static ConversationEvent Prepare(
                 Conversation conversation,
                 bool started
                 )

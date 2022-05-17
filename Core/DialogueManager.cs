@@ -23,6 +23,8 @@ namespace TalkBox.Core
 
         public GameState State = GameState.Gameplay;
 
+        private Queue<Conversation> conversationQueue = new Queue<Conversation>();
+
         protected override void SafeInitialize()
         {
             base.SafeInitialize();
@@ -52,6 +54,10 @@ namespace TalkBox.Core
                     }
                     break;
                 case GameState.Gameplay:
+                    if (TryGetNextConversation(out Conversation conversation))
+                    {
+                        StartConversation(conversation);
+                    }
                     if (ManageCursor)
                     {
                         Cursor.lockState = CursorLockMode.Locked;
@@ -188,6 +194,30 @@ namespace TalkBox.Core
 
             Debug.LogWarning("Character doesn't exist!");
             return null;
+        }
+
+        public void StartConversation(Conversation conversation)
+        {
+            if (State == GameState.Dialogue) // already in a conversation
+            {
+                conversationQueue.Enqueue(conversation);
+            }
+            else
+            {
+                EventDispatcher.Dispatch(ConversationEvent.Prepare(conversation, true));
+            }
+        }
+
+        public bool TryGetNextConversation(out Conversation conversation)
+        {
+            if (conversationQueue.Count > 0)
+            {
+                conversation = conversationQueue.Dequeue();
+                return true;
+            }
+
+            conversation = null;
+            return false;
         }
     }
 }
