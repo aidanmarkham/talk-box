@@ -9,11 +9,11 @@ namespace TalkBox.Missions
     [CreateAssetMenu(fileName = "New Mission", menuName = "TalkBox/Mission", order = 1)]
     public class Mission : ScriptableObject
     {
-        public Mission MissionTag;
-        
         [TextArea]
         [FormerlySerializedAs("DisplayText")]
         [SerializeField] protected string displayText;
+
+        public List<MissionTag> Tags;
 
         public virtual string DisplayText
         {
