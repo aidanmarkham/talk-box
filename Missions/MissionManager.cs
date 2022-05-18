@@ -3,6 +3,7 @@ using MacSalad.Core;
 using MacSalad.Core.Events;
 using MacSalad.Core.Utility;
 using TMPro;
+using UnityEngine;
 
 namespace TalkBox.Missions
 {
@@ -28,6 +29,7 @@ namespace TalkBox.Missions
 
 		public void AddMission(Mission mission)
 		{
+			if (HasMission(mission)) return;
 			missions.Add(RuntimeInstanceManager.GetRuntimeInstance(mission));
 		}
 
@@ -88,6 +90,7 @@ namespace TalkBox.Missions
 				}
 			}
 
+			Debug.LogWarning($"[MissionManager] Mission {m} is not in missions list.");
 			return MissionState.NotStarted;
 		}
 
