@@ -11,8 +11,7 @@ namespace TalkBox.Editor
 	public class GoToNodeEditor : NodeEditor
 	{
 		private GoToNode goToNode;
-
-		int selected = 0;
+		
 		public override void OnBodyGUI()
 		{
 			if (goToNode == null) goToNode = target as GoToNode;
@@ -26,11 +25,16 @@ namespace TalkBox.Editor
 
 			// Destination selector
 			var destinations = GetDestinations(conversation);
-			selected = EditorGUILayout.Popup("Destination: ", selected, destinations);
-			if(selected >= destinations.Length)
+			var selected = 0;
+			for (int i = 0; i < destinations.Length; i++)
 			{
-				selected = 0;
+				if (destinations[i] == goToNode.Destination)
+				{
+					selected = i;
+					break;
+				}
 			}
+			selected = EditorGUILayout.Popup("Destination: ", selected, destinations);
 			goToNode.Destination = destinations[selected];
 
 			NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("enter"));
