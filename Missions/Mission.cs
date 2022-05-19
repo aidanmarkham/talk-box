@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -43,6 +44,12 @@ namespace TalkBox.Missions
         public static bool operator !=(Mission lhs, Mission rhs)
         {
             return !(lhs == rhs);
+        }
+        
+        [Button]
+        private void GenerateNewID()
+        {
+            ID = Guid.NewGuid().ToString();
         }
     }
 }
