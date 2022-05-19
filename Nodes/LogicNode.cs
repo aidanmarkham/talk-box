@@ -47,11 +47,11 @@ namespace TalkBox.Nodes
 			Conversation conversation = graph as Conversation;
 
 			DialogueNode nextDialogue = null;
-			LogicNode logicNode = this;
+			Node node = this;
 			int maxLoops = 100;
 			int counter = 0;
 
-			while (nextDialogue == null)
+			while (node && nextDialogue == null)
 			{
 				counter++;
 				if (counter > maxLoops)
@@ -59,29 +59,22 @@ namespace TalkBox.Nodes
 					break;
 				}
 
-				var nextNode = logicNode.Evaluate();
-
-				DialogueNode d = nextNode as DialogueNode;
-				LogicNode l = nextNode as LogicNode;
-				ActionNode a = nextNode as ActionNode;
-
-				if (d)
+				switch (node)
 				{
-					nextDialogue = d;
-					break;
+					case DialogueNode d:
+						nextDialogue = d;
+						break;
+					case LogicNode l:
+						node = l.Evaluate();
+						break;
+					case GoToNode goTo:
+						node = goTo.GetDestinationNode();
+						break;
+					case ActionNode a:
+						conversation.current = null;
+						node = null;
+						break;
 				}
-
-				if (l)
-				{
-					logicNode = l;
-				}
-
-				if (nextNode == null)
-				{
-					conversation.current = null;
-					break;
-				}
-
 			}
 
 			return nextDialogue;
