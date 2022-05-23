@@ -25,6 +25,9 @@ namespace TalkBox.Core
 
         private Queue<Conversation> conversationQueue = new Queue<Conversation>();
 
+		// hack: this is how we're keeping track of who is a kind of character but we're making a big assumption that there is only ever one of a character type
+		public readonly Dictionary<CharacterData, CharacterData> CharacterTypeMap = new Dictionary<CharacterData, CharacterData>();
+
         protected override void SafeInitialize()
         {
             base.SafeInitialize();
@@ -182,6 +185,22 @@ namespace TalkBox.Core
 
         public Character GetCharacter(CharacterData data)
         {
+            Character character = null;
+            
+            // try character type map first
+            if (CharacterTypeMap.ContainsKey(data)) character = GetCharacterInternal(CharacterTypeMap[data]);
+            if (character) return character;
+            
+            // then try the character data
+            character = GetCharacterInternal(data);
+            if (character) return character;
+
+            if(!character) Debug.LogWarning("Character doesn't exist!");
+            return character;
+        }
+
+        private Character GetCharacterInternal(CharacterData data)
+        {
             for (int i = 0; i < Characters.Count; i++)
             {
                 if(Characters[i].CharacterData == null)
@@ -191,8 +210,7 @@ namespace TalkBox.Core
 
                 if (Characters[i].CharacterData.ID == data.ID) return Characters[i];
             }
-
-            Debug.LogWarning("Character doesn't exist!");
+            
             return null;
         }
 

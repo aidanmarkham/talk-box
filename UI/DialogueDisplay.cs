@@ -150,16 +150,21 @@ public class DialogueDisplay : MSBehaviour
 		EventDispatcher.Dispatch(DialogueEvent.Prepare(d, true));
 
 		// Find the speaking character
-		speakingCharacter = DialogueManager.Instance.GetCharacter(d.Character);
+		if(!DialogueManager.Instance.CharacterTypeMap.TryGetValue(d.Character, out var character))
+		{
+			character = d.Character;
+		}
+		
+		speakingCharacter = DialogueManager.Instance.GetCharacter(character);
 
 		// Clear the text box
 		DialogueText.text = "";
 
-		NameText.text = d.Character.Name;
+		NameText.text = character.FullName;
 
-		HeaderBackground.color = d.Character.CharacterColor;
+		HeaderBackground.color = character.CharacterColor;
 
-		Color.RGBToHSV(d.Character.CharacterColor, out float H, out float S, out float V);
+		Color.RGBToHSV(character.CharacterColor, out float H, out float S, out float V);
 
 		// this is a light colored backgroud
 		if (V > 0.5f)
@@ -200,7 +205,7 @@ public class DialogueDisplay : MSBehaviour
 		var index = 0;
 
 		// Get the text from the dialogue
-		var rawText = d.Text;
+		var rawText = DialogueTextProcessor.GetFormattedText(d);
 
 		// Wait a frame to avoid accidentally skipping to next dialogue
 		yield return null;
@@ -233,7 +238,7 @@ public class DialogueDisplay : MSBehaviour
 			// Wait for a while depending on what character we just showed
 			if (Char.IsLetterOrDigit(rawText[index]))
 			{
-				EventDispatcher.Dispatch(SpeakingEvent.Prepare(d.Character, rawText[index], LetterDelay));
+				EventDispatcher.Dispatch(SpeakingEvent.Prepare(character, rawText[index], LetterDelay));
 				yield return StartCoroutine(SkippableWaitForSeconds(LetterDelay));
 			}
 			else if (rawText[index] == '.')

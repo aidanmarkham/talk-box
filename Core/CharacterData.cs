@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using UnityEngine.Serialization;
 
 namespace TalkBox.Core
 {
@@ -10,9 +11,11 @@ namespace TalkBox.Core
     [CreateAssetMenu(fileName = "Character", menuName = "TalkBox/Character", order = 1)]
     public class CharacterData : ScriptableObject
     {
-        public string Name;
+        [FormerlySerializedAs("Name")] public string FullName;
+        public string ShortName;
         public Color CharacterColor = new Color(21f/255f, 26f/255f, 34f/255f);
         public string ID = Guid.NewGuid().ToString();
+        
         [Button]
         public void GenerateNewID()
         {
