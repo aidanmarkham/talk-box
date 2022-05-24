@@ -13,18 +13,9 @@ public class SetMissionState : ActionNode
 
     public override void Action()
     {
+        MissionManager.Instance.AddMission(Mission);
+
         EventDispatcher.Dispatch(MissionEvent.Prepare(Mission, StateToSet));
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
