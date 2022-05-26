@@ -30,6 +30,8 @@ namespace TalkBox.Nodes
         [Output(dynamicPortList = true)]
         public string[] dialogueOptions;
 
+        public bool HasDialogueOptions => dialogueOptions.Length > 0;
+
         // Use this for initialization
         protected override void Init()
         {
