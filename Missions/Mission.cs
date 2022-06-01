@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
+#pragma warning disable 660,661
 
 namespace TalkBox.Missions
 {
