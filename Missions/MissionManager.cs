@@ -9,7 +9,10 @@ namespace TalkBox.Missions
 {
 	public class MissionManager : SingletonMB<MissionManager>
 	{
+		[ES3Serializable]
 		private List<Mission> missions = new List<Mission>();
+		
+		[ES3NonSerializable]
 		public TMP_Text MissionDisplay;
 
 		public IReadOnlyList<Mission> Missions => missions;
