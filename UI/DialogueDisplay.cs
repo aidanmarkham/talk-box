@@ -93,6 +93,9 @@ public class DialogueDisplay : MSBehaviour
 		DialogueText.text = "";
 		NameText.text = "";
 
+		// set the background color before we fade in
+		HeaderBackground.color = current.Character.CharacterColor;
+
 		// hide all dialogue options that exist
 		for (int i = 0; i < dialogueOptions.Count; i++)
 		{
