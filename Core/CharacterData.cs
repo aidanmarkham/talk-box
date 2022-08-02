@@ -11,6 +11,7 @@ namespace TalkBox.Core
     public class CharacterData : ScriptableObject
     {
         public string Name;
+        public Sprite Portrait;
 
         public string ID = Guid.NewGuid().ToString();
         [Button]
