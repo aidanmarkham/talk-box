@@ -29,6 +29,7 @@ namespace TalkBox.Core
         public int PantsMaterial = -1;
         public int Shoes = 0;
         public int ShoesMaterial = -1;
+        public int CharacterType;
 
         [Button]
         public void GenerateNewID()
