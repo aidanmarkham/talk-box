@@ -23,6 +23,7 @@ namespace TalkBox.Core
         public int Mouth = 0;
         public int Eyes = 0;
         public int Voice = 0;
+        public int Hat = 0;
         public int Shirt = 0;
         public int ShirtMaterial = -1;
         public int Pants = 0;
