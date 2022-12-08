@@ -24,6 +24,9 @@ namespace TalkBox.Core
         public int Eyes = 0;
         public int Voice = 0;
         public int CharacterType;
+        public string EntityType;
+        public string DomainType;
+        public float LastGenerateTime = -1;
 
         [Button]
         public void GenerateNewID()
